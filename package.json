@@ -1,0 +1,26 @@
+{
+  "name": "jedi-masters-consumer",
+  "version": "1.0.0",
+  "description": "Jedi Masters Consumer service",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "nodemon src/index.js --exec babel-node --presets es2015,stage-2",
+    "build": "babel src -d dist --presets es2015,stage-2",
+    "serve": "node dist/index.js"
+  },
+  "author": "Mateusz Waszkiewicz",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.38.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "nodemon": "^1.18.3"
+  }
+}
