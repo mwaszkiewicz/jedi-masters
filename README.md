@@ -1,1 +1,1 @@
-# jedi-masters-consumer
+# jedi-masters
