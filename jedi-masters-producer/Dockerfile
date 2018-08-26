@@ -7,7 +7,7 @@ RUN npm install
 
 COPY . .
 
-ENV AMQP_URL=amqp://guest:guest@localhost:15672
+ENV AMQP_URL=amqp://guest:guest@localhost:5672
 
 RUN npm install
 

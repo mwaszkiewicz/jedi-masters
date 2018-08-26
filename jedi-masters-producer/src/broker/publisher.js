@@ -1,7 +1,6 @@
-var Channel = require('./channel');
-var queue = 'queue';
+import Channel from './channel';
+const queue = 'queue';
 
-module.exports = sendMessage;
 function sendMessage (msg){
     Channel(queue, function(err, channel, conn) {  
         if (err) {
@@ -23,3 +22,5 @@ function sendMessage (msg){
 function encode(doc) {  
     return new Buffer(JSON.stringify(doc));
   }
+
+  export default sendMessage;

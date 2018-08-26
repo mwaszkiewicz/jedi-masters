@@ -1,9 +1,8 @@
-var amqp = require('amqplib/callback_api');
-var url = process.env.AMQP_URL || 'amqp://localhost';
+import { connect } from 'amqplib/callback_api';
+const url = process.env.AMQP_URL || 'amqp://guest:guest@localhost:5672';
 
-module.exports = createQueueChannel;
 function createQueueChannel(queue, cb) {  
-  amqp.connect(url, onceConnected);
+  connect(url, onceConnected);
   function onceConnected(err, conn) {  
     if (err) {
       console.error('Error connecting:', err.stack);
@@ -30,3 +29,5 @@ function createQueueChannel(queue, cb) {
       }
   }
 }
+
+export default createQueueChannel;
