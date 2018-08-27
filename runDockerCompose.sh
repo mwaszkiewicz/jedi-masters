@@ -1,6 +1,4 @@
 #!/bin/bash
-echo "START"
+echo "START DOCKER COMPOSE"
 
 docker-compose up
-
-sh ./jedi-master-consumer/build.sh
