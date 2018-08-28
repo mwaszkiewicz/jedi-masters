@@ -8,7 +8,10 @@ Clone this repo: git clone https://github.com/mwaszkiewicz/jedi-masters.git
 Make sure Docker is running
 Run runDockerCompose.sh to build and run Postgres and RabbitMq in docker containers.
 Run jedi-masters-consumer\Build.sh script for starting consumer service.
-Run jedi-masters-consumer\src\createDb.sh for create database and run first migration.
+Run jedi-masters-consumer\src\createDb.sh for create database and run first migration or run manually commands in terminal:
+npm install -g sequelize-cli
+sequelize db:create
+sequelize db:migrate
 Run jedi-masters-producer\Build.sh script for starting producer service.
 
 Check that the containers are running by typing docker ps and then you can use http://localhost:3002/ as producer and http://localhost:3001/ as consumer services.
