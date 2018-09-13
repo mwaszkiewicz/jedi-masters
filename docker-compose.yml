@@ -1,6 +1,17 @@
-version: '3'
+version: '2'
 
 services:
+    jedi-masters-consumer:
+         build: ./jedi-masters-consumer
+         ports:
+            - "3001:3001"
+
+    jedi-masters-producer:
+         build: ./jedi-masters-producer
+         ports:
+            - "3002:3002"
+
+
 
     postgresql:
         image: postgres:9.6.2-alpine
