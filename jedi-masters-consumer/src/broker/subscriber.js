@@ -1,9 +1,7 @@
 import Channel from './channel';
 import  db  from '../config/database';
 
-const queue = 'queue';
-
-function consumeMessage (){
+function consumeMessage (queue){
 Channel(queue, function(err, channel, conn) {  
   if (err) {
     console.error(err.stack);
@@ -12,6 +10,7 @@ Channel(queue, function(err, channel, conn) {
     console.log('channel and queue created');
     consume();
   }
+
   function consume() {
     channel.get(queue, {}, onConsume);
     function onConsume(err, msg) {
@@ -21,11 +20,25 @@ Channel(queue, function(err, channel, conn) {
       else if (msg) {
         const obj= JSON.parse(msg.content.toString())
         console.log('consuming %j',obj);
-    db.Order.create({
-      type: obj.type,
-      name: obj.name,
-      qunatity: obj.quantity
-    })
+
+        if (queue == 'add'){
+          db.Order.create({
+          type: obj.type,
+          name: obj.name,
+          quantity: obj.quantity
+      })}
+      else if (queue == 'update'){
+                db.Order.update({  
+                  type: obj.type,
+                  name: obj.name,
+                  quantity: obj.quantity},
+                {_id : 1}).success(function() { 
+                  console.log("Order updated successfully!");
+              }).error(function(err) { 
+                  console.log("Order update failed !");
+              });
+            }
+
         setTimeout(function() {
           channel.ack(msg);
           consume();

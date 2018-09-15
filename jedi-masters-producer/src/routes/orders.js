@@ -1,10 +1,12 @@
 import validator from '../utils/validator';
-import sendMessage from '../broker/publisher';
+import Publisher from '../broker/publisher';
+
+const publisher = new Publisher();
 
 const action = (req, res) => {
      validator.validate(req.body, {abortEarly: false})
         .then(validatedOrderPart => {
-            sendMessage(validatedOrderPart);
+            publisher.publish(validatedOrderPart, 'add');
             res.status(201).send("Sent");
         })
         .catch(validationError => {

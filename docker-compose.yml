@@ -10,9 +10,6 @@ services:
          build: ./jedi-masters-producer
          ports:
             - "3002:3002"
-
-
-
     postgresql:
         image: postgres:9.6.2-alpine
         ports:

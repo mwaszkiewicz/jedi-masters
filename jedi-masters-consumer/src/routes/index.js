@@ -1,10 +1,12 @@
-import { Router } from 'express';
-import  db  from '../config/database';
 
-const router  = Router();
+import  db  from '../models/index';
 
-router.get('/api/v1/orders', (req,res)=> {
-      db.Order.findAll({
+export default class Endpoint {
+
+    constructor() {  }
+
+    getAll = (req,res) => {
+        db.Order.findAll({
             attributes: ['type', 'name','quantity'],
             order: [
                 ['createdAt', 'DESC']
@@ -12,6 +14,16 @@ router.get('/api/v1/orders', (req,res)=> {
         })
         .then((orders) => res.status(200).send(orders))
         .catch((error) => res.status(400).send(error));
-});
+    };
 
-export default router;
+    getOneById = (req,res) => {
+        return db.Order.find({
+            where: {
+               id: req.params.id
+            }
+         })
+         .then((order) => res.status(200).send(order))
+         .catch((error) => res.status(400).send(error));
+    };
+
+};

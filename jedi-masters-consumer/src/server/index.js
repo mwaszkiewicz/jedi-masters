@@ -4,8 +4,8 @@ import logger from 'morgan';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../../swagger.json';
 
-const port = '3002';
-const name = 'jedi-masters-producer';
+const port = '3001';
+const name = 'jedi-masters-consumer';
 
 export default class Server {
   apiInstance = undefined;
@@ -16,17 +16,9 @@ export default class Server {
 
   initializeApi = () => {
     this.apiInstance = express();
-    this.apiInstance.use(bodyParser.text({
-      type: 'text/html',
-      limit: '1mb'
-    }));
-    this.apiInstance.use(bodyParser.urlencoded({
-      extended: true,
-      limit: '1mb'
-    }));
-    this.apiInstance.use(bodyParser.json({
-      limit: '1mb'
-    }));
+    this.apiInstance.use(bodyParser.text({type: 'text/html', limit: '1mb'}));
+    this.apiInstance.use(bodyParser.urlencoded({ extended: true, limit: '1mb'}));
+    this.apiInstance.use(bodyParser.json({ limit: '1mb'}));
     this.apiInstance.use(logger('dev'));
     console.info('Api setup done');
   };
