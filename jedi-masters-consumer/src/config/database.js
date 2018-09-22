@@ -8,5 +8,5 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 const Order = OrderModel(sequelize, Sequelize);
 
 export default {
-  Order
-}
+    Order
+};

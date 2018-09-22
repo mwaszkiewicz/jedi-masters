@@ -1,4 +1,3 @@
-
 import  db  from '../models/index';
 
 export default class Endpoint {
@@ -12,18 +11,17 @@ export default class Endpoint {
                 ['createdAt', 'DESC']
             ],
         })
-        .then((orders) => res.status(200).send(orders))
-        .catch((error) => res.status(400).send(error));
+            .then((orders) => res.status(200).send(orders))
+            .catch((error) => res.status(400).send(error));
     };
 
     getOneById = (req,res) => {
         return db.Order.find({
             where: {
-               id: req.params.id
+                id: req.params.id
             }
-         })
-         .then((order) => res.status(200).send(order))
-         .catch((error) => res.status(400).send(error));
+        })
+            .then((order) => res.status(200).send(order))
+            .catch((error) => res.status(400).send(error));
     };
-
-};
+}

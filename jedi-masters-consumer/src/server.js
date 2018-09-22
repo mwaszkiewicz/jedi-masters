@@ -9,6 +9,15 @@ consumeMessage('add');
 consumeMessage('update');
 
 server.addApiRoute('GET', '/api/v1/orders', endpoint.getAll);
-server.addApiRoute('GET', '/api/v1/orders:id', endpoint.getAll);
+server.addApiRoute('GET', '/api/v1/orders:id', endpoint.getOneById);
 server.createDocumentation();
 server.start();
+
+// todo konfiguracja es linta
+// ES6
+// docker
+// consumowanie
+// promisy
+// migracje bazy danych
+// async await
+// config
