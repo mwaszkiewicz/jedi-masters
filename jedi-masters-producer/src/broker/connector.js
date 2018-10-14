@@ -1,9 +1,12 @@
 const url = process.env.AMQP_URL || 'amqp://guest:guest@localhost:5672';
+const exchange = process.env.AMQP_EXCHANGE || 'jedi';
+const exchangeType = process.env.AMQP_EXCHANGE_TYPE || 'direct';
+
 const rabbit = require('amqplib');
 
 export default class RabbitConnector {
 
-    _connection = undefined;
+    connection = undefined;
 
     constructor() {
         this.rabbitMQUrl = url;
@@ -12,16 +15,34 @@ export default class RabbitConnector {
   connect = () => {
       return rabbit.connect(this.rabbitMQUrl)
           .then((conn) => {
-              return conn.createChannel();
-          }).then((_connection) => {
-              console.log('Connected');
-          }).catch(console.warn);
+              console.log('Connecting..');
+              return conn.createConfirmChannel();
+          }).then((connection) => {
+              this.connection = connection;
+              return connection.assertExchange(
+                  exchange,
+                  exchangeType
+              ).then(() => {
+                  console.log('Connected..');
+              }).catch( (err) => {
+                  console.error(err);
+              });
+          });
   };
 
-  publish = (msg, queue) => {
-      if (this._connection !== undefined) {
-          this._connection.sendToQueue(queue, this.encode(msg));
-      }
+  disconnect = () => {
+      return this.connection.close().then( () => {
+          return rabbit.close();
+      });
+  }
+
+  publish = (msg) => {
+      this.connection.publish(this.exchange, '', this.encode(msg));
+  }
+
+  publish2 = (msg, queue) => {
+      this.connection.sendToQueue(queue, this.encode(msg));
+      return connection.waitForConfirms();
   };
 
   encode = (doc) => {
