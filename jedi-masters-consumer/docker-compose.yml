@@ -8,12 +8,12 @@ services:
     queue:
         image: rabbitmq:3-management
         ports:
-          - 15672:15672y
+          - 15672:15672
           - 15671:15671
           - 5672:5672
     jedi-masters-consumer:
-         build: ./jedi-masters-consumer
-         command: npm run serve
+         build: .
+         command: npm run start
          image: matys/consumer
          ports:
             - "3001:3001"

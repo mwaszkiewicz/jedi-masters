@@ -16,6 +16,9 @@ export default class Server {
 
   initializeApi = () => {
       this.apiInstance = express();
+
+      // todo middlewaresy tu
+
       this.apiInstance.use(bodyParser.text({
           type: 'text/html',
           limit: '1mb'

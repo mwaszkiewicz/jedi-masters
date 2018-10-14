@@ -7,8 +7,10 @@
     "test": "test",
     "start": "nodemon src/server.js --exec babel-node --presets es2015,stage-2",
     "build": "babel src -d dist --presets es2015,stage-2",
+    "compile": "./node_modules/.bin/gulp compile",
     "serve": "node dist/index.js",
-    "db:migrate": "./node_modules/.bin/sequelize db:migrate"
+    "migrateDb": "./node_modules/.bin/sequelize db:migrate",
+    "createDb": "./node_modules/.bin/sequelize db:create"
   },
   "author": "Mateusz Waszkiewicz",
   "license": "ISC",

@@ -1,27 +1,14 @@
-import Channel from './channel';
+import RabbitConnector from './connector';
 
 export default class Publisher {
 
-    constructor() { }
+    constructor() {
+        this._connector = new RabbitConnector();
+    }
 
   publish = (msg, queue) => {
-      Channel(queue, (err, channel, conn) => {
-          if (err) {
-              console.error(err.stack);
-          } else {
-              console.log('msg %j', msg);
-              channel.sendToQueue(queue, this.encode(msg), {
-                  persistent: true
-              });
-              setImmediate(() => {
-                  channel.close();
-                  conn.close();
-              });
-          }
-      });
-  };
-
-  encode = (doc) => {
-      return new Buffer(JSON.stringify(doc));
+      if (this._connector !== undefined) {
+          this._connector.publish(msg, queue);
+      }
   };
 }

@@ -159,7 +159,7 @@ module.exports = exports = {
         "consistent-this": [ WARN, "self" ],
         "eol-last": WARN,
         "func-names": WARN,
-        "func-style": [ WARN, "declaration" ],
+        "func-style": [ OFF, "declaration" ],
         "id-length": [ WARN, { "min": 2, "max": 32 } ],
         "indent": [ WARN, 4 ],
         "jsx-quotes": [ WARN, "prefer-double" ],
@@ -185,7 +185,7 @@ module.exports = exports = {
         "no-spaced-func": WARN,
         "no-ternary": OFF,
         "no-trailing-spaces": WARN,
-        "no-underscore-dangle": WARN,
+        "no-underscore-dangle": OFF,
         "no-unneeded-ternary": WARN,
         "object-curly-spacing": [ WARN, "always" ],
         "one-var": OFF,
@@ -194,7 +194,7 @@ module.exports = exports = {
         "padded-blocks": [ WARN, "never" ],
         "quote-props": [ WARN, "consistent-as-needed" ],
         "quotes": [ WARN, "single" ],
-        "require-jsdoc": [ WARN, {
+        "require-jsdoc": [ OFF, {
             "require": {
                 "FunctionDeclaration": true,
                 "MethodDefinition": true,

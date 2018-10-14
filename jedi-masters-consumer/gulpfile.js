@@ -10,18 +10,25 @@ const paths = {
     del: ['dist/**']
 };
 
-gulp.task('compile', function () {
+gulp.task('setup', ['compile'], function () {
+    return gulp.src('src/**/*.json')
+        .pipe(gulp.dest(paths.dist,  {overwrite: false}));
+});
+
+gulp.task('compile',['clean'], function () {
     return gulp.src(paths.src)
         .pipe(babel())
         .pipe(gulp.dest(paths.dist));
 });
 
-gulp.task('watch', ['compile'], function (done) {
+gulp.task('watch', ['setup'], function (done) {
     const stream = nodemon({
         script: 'dist/server.js' 
         , watch: paths.src
-        , tasks: ['lint','compile']
+        , tasks: ['compile']
         , done: done
+    }).on('restart', function(){
+        console.log('restarted');
     });
     return stream;
 });

@@ -1,13 +1,13 @@
-import { connect }from 'amqplib/callback_api';
-const url = process.env.AMQP_URL || 'amqp://guest:guest@localhost:5672';
+'use strict';Object.defineProperty(exports, "__esModule", { value: true });var _callback_api = require('amqplib/callback_api');
+var url = process.env.AMQP_URL || 'amqp://guest:guest@localhost:5672';
 
 function createQueueChannel(queue, cb) {
-    connect(url, onceConnected);
+    (0, _callback_api.connect)(url, onceConnected);
 
     function onceConnected(err, conn) {
         if (err) {
             console.error('Error connecting:', err.stack);
-        }else {
+        } else {
             console.log('connected');
             conn.createChannel(onceChannelCreated);
         }
@@ -15,21 +15,22 @@ function createQueueChannel(queue, cb) {
         function onceChannelCreated(err, channel) {
             if (err) {
                 cb(err);
-            }else {
+            } else {
                 channel.assertQueue(queue, {
-                    durable: true
-                }, onceQueueCreated);
+                    durable: true },
+                onceQueueCreated);
             }
 
             function onceQueueCreated(err) {
                 if (err) {
                     cb(err);
-                }else {
+                } else {
                     cb(null, channel, conn);
                 }
             }
         }
     }
-}
+}exports.default =
 
-export default createQueueChannel;
+createQueueChannel;
+//# sourceMappingURL=channel.js.map
