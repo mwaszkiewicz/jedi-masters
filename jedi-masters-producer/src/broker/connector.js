@@ -27,6 +27,8 @@ export default class RabbitConnector {
               }).catch( (err) => {
                   console.error(err);
               });
+          }).catch( (err) => {
+              console.error(err);
           });
   };
 
@@ -40,7 +42,7 @@ export default class RabbitConnector {
       this.connection.publish(this.exchange, '', this.encode(msg));
   }
 
-  publish2 = (msg, queue) => {
+  publish = (msg, queue) => {
       this.connection.sendToQueue(queue, this.encode(msg));
       return connection.waitForConfirms();
   };

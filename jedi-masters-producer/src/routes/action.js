@@ -20,7 +20,6 @@ const action = (req, res, schema, queue) => {
             const errorMessage = validationError.details.map((d) => {
                 return d.message;
             });
-            console.log('dupa');
             res.status(400).send(errorMessage);
         });
 };
