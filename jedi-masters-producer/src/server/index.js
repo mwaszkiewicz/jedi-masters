@@ -16,7 +16,6 @@ export default class Server {
 
   initializeApi = () => {
       this.apiInstance = express();
-
       this.apiInstance.use(bodyParser.text({
           type: 'text/html',
           limit: '1mb'
